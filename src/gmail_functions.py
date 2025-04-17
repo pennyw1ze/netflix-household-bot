@@ -5,8 +5,6 @@ import pickle
 import base64
 import os
 import webbrowser
-import time
-import threading
 import re
 
 SENDER = "Netflix <info@account.netflix.com>"

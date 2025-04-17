@@ -1,6 +1,8 @@
 /myenv
 __pycache__
 /.vscode
+
+# Content of "data" folder
 ngrok_url.txt
 secret.json
 token.pickle

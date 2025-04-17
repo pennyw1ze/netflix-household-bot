@@ -26,10 +26,10 @@ def click_confirm_button(url):
 
         # Click the button
         button.click()
-        print("✅ Button clicked!")
+        print("Button clicked!")
 
     except Exception as e:
-        print(f"⚠️ Failed to click button: {e}")
+        print(f"Failed to click button: {e}")
 
     finally:
         time.sleep(5)  # Observe before closing
