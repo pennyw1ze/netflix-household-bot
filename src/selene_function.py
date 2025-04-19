@@ -21,8 +21,8 @@ def click_confirm_button(url):
         # Make sure the body has loaded
         wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 
-        # Now wait for the button to be clickable using CSS Selector
-        button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".pressable_styles__a6ynkg0 button_styles__1kwr4ym0  default-ltr-cache-1dytctv-StyledBaseButton e1ax5wel2")))
+        # Now wait for the button to be clickable using CSS Selector by filtering type name (type="button")
+        button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='button']")))
 
         # Click the button
         button.click()
