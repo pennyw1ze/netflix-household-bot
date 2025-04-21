@@ -10,7 +10,7 @@ def click_confirm_button(url):
     options = Options()
     # options.add_argument('--headless')  # Uncomment for headless mode
 
-    service = Service(executable_path="/usr/bin/geckodriver")
+    service = Service(executable_path="/usr/local/bin/geckodriver")
     driver = webdriver.Firefox(service=service, options=options)
 
     driver.get(url)
