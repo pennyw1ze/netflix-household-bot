@@ -1,36 +1,23 @@
-import time
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.service import Service
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+import requests
+from bs4 import BeautifulSoup
 
-def click_confirm_button(url):    
-    options = Options()
-    # options.add_argument('--headless')  # Uncomment for headless mode
+def press_button(url):
 
-    service = Service(executable_path="/usr/local/bin/geckodriver")
-    driver = webdriver.Firefox(service=service, options=options)
+    # Making a GET request
+    r = requests.get(url)
 
-    driver.get(url)
+    # Parsing the HTML
+    soup = BeautifulSoup(r.content, 'html.parser')
 
-    wait = WebDriverWait(driver, 20)
+    # Finding the button
+    link = soup.find('link', {'as': 'script'})
 
-    try:
-        # Make sure the body has loaded
-        wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+    if link:
+        # Find the real link parsing the href
+        href = link.get('href')
 
-        # Now wait for the button to be clickable using CSS Selector by filtering type name (type="button")
-        button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='button']")))
+        print("Link text:", href)
+    else:
+        print("Button not found.")
 
-        # Click the button
-        button.click()
-        print("Button clicked!")
-
-    except Exception as e:
-        print(f"Failed to click button: {e}")
-
-    finally:
-        time.sleep(5)  # Observe before closing
-        driver.quit()
+press_button("http://127.0.0.1:5500/page.html")
