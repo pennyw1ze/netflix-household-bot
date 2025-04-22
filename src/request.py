@@ -1,23 +1,16 @@
-import requests
-from bs4 import BeautifulSoup
+import sys
+from playwright.sync_api import sync_playwright
 
-def press_button(url):
+def press_button(link):
 
-    # Making a GET request
-    r = requests.get(url)
-
-    # Parsing the HTML
-    soup = BeautifulSoup(r.content, 'html.parser')
-
-    # Finding the button
-    link = soup.find('link', {'as': 'script'})
-
-    if link:
-        # Find the real link parsing the href
-        href = link.get('href')
-
-        print("Link text:", href)
-    else:
-        print("Button not found.")
-
-press_button("http://127.0.0.1:5500/page.html")
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        page.goto(link)
+        # click the "Confirm Update" button
+        page.click('[data-uia="set-primary-location-action"]')
+        # give it a moment to fire
+        page.wait_for_timeout(2000)
+        # Close the browser
+        browser.close()
+        print("✅ Clicked Confirm Update button")
