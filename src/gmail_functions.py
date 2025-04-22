@@ -1,6 +1,6 @@
 import requests
 from google.auth.transport.requests import Request
-from request import click_confirm_button
+from request import press_button
 import pickle
 import base64
 import os
@@ -99,6 +99,6 @@ def process_mail():
                 return
             
             # Open the link in a new tab
-            click_confirm_button(link)
+            press_button(link)
     else:
         print("No new unread emails found.")
